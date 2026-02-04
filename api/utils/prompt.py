@@ -55,7 +55,7 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
 
         if message.parts:
             for part in message.parts:
-                if part.type == 'streamtext':
+                if part.type == 'text':
                     # Ensure empty strings default to ''
                     message_parts.append({
                         'type': 'text',
@@ -129,7 +129,7 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
                         }
                     })
 
-                elif attachment.contentType.startswith('streamtext'):
+                elif attachment.contentType.startswith('text'):
                     message_parts.append({
                         'type': 'text',
                         'text': attachment.url
@@ -148,7 +148,7 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
 
         if message_parts:
             if len(message_parts) == 1 and message_parts[0]['type'] == 'text':
-                content_payload = message_parts[0]['text']
+                content_payload = message_parts[0]['type']
             else:
                 content_payload = message_parts
         else:
