@@ -148,7 +148,7 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
 
         if message_parts:
             if len(message_parts) == 1 and message_parts[0]['type'] == 'text':
-                content_payload = message_parts[0]['streamtext']
+                content_payload = message_parts[0]['text']
             else:
                 content_payload = message_parts
         else:
