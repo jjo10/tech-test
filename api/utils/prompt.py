@@ -54,7 +54,7 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
         tool_result_messages = []
 
         if message.parts:
-            for part in message.parts:
+            for part in message.part:
                 if part.type == 'text':
                     # Ensure empty strings default to ''
                     message_parts.append({
