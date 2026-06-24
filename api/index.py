@@ -31,7 +31,7 @@ async def handle_chat_data(request: Request, protocol: str = Query('data')):
     messages = request.messages
     openai_messages = convert_to_openai_messages(messages)
 
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"), base_url="https://ai-gateway.vercel.sh/v1")
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     response = StreamingResponse(
         stream_text(client, openai_messages, TOOL_DEFINITIONS, AVAILABLE_TOOLS, protocol),
         media_type="text/event-stream",
