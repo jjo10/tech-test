@@ -148,7 +148,9 @@ def convert_to_openai_messages(messages: List[ClientMessage]) -> List[ChatComple
 
         if message_parts:
             if len(message_parts) == 1 and message_parts[0]['type'] == 'text':
-                content_payload = message_parts[0]['text']
+                # Read the text defensively so a malformed part can't raise a
+                # KeyError and 500 the whole request.
+                content_payload = message_parts[0].get('content', '')
             else:
                 content_payload = message_parts
         else:
